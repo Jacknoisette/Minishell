@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:50:54 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/04 14:03:16 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/06 14:04:57 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ char *rebuild_temp(t_lst_var	*temp)
 int	search_for_var(t_bash *shell)
 {
 	t_lst_var	**temp;
+	t_lst_var	*result;
 	int			i;
 	int			len;
 
@@ -132,7 +133,8 @@ int	search_for_var(t_bash *shell)
 			return (free_list_point(&temp, len), free_cmd(shell->line.group), ERROR);
 		i++;
 	}
-	cmd_parsing(shell, temp, len);
+	result = convert_lst(temp);
+	cmd_parsing(shell, result);
 	i = 0;
 	while (i < len)
 	{

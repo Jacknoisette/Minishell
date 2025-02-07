@@ -6,7 +6,7 @@
 #    By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/15 09:01:08 by tgoudman          #+#    #+#              #
-#    Updated: 2025/02/04 14:27:50 by jdhallen         ###   ########.fr        #
+#    Updated: 2025/02/07 15:24:59 by jdhallen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,33 +18,23 @@ NAME = minishell
 PARS_DIR = src/parsing
 EXEC_DIR = src/exec
 SRC_DIR = src/global
+vpath %.c $(PARS_DIR) $(EXEC_DIR) $(SRC_DIR)
 LIBFT_DIR = Libft
 
 SRCS =	main.c \
-		$(SRC_DIR)/minishell.c  $(SRC_DIR)/signale.c \
-		$(SRC_DIR)/init.c $(SRC_DIR)/init_env.c \
-		$(SRC_DIR)/cleaning.c $(SRC_DIR)/utils.c \
-		$(EXEC_DIR)/builtins.c $(EXEC_DIR)/export.c \
-		$(EXEC_DIR)/echo.c $(EXEC_DIR)/execve.c \
-		$(EXEC_DIR)/exec.c $(EXEC_DIR)/unset.c \
-		$(PARS_DIR)/parsing.c $(PARS_DIR)/parsing_utils.c\
-		$(PARS_DIR)/variable.c $(PARS_DIR)/cmd_creation.c\
-		$(PARS_DIR)/temp_creation.c $(PARS_DIR)/line_creation.c\
-		$(PARS_DIR)/ft_subvar.c $(PARS_DIR)/create_temp.c\
-		$(PARS_DIR)/create_cmd.c $(PARS_DIR)/cleaning_parsing.c\
+		minishell.c  signale.c init.c init_env.c \
+		cleaning.c utils.c builtins.c export.c \
+		echo.c execve.c exec.c unset.c \
+		parsing.c parsing_utils.c\
+		cmd_creation.c cmd_creation_action.c \
+		cmd_creation_utils.c\
+		temp_creation.c line_creation.c\
+		ft_subvar.c create_temp.c variable.c \
+		create_cmd.c cleaning_parsing.c convert_lst.c\
+		heredoc.c create_line.c cmd_fd_creation.c \
+		list_to_shell_line.c
 
-OBJS = $(OBJ_DIR)/main.o \
-		$(OBJ_DIR)/minishell.o  $(OBJ_DIR)/signale.o \
-		$(OBJ_DIR)/init.o $(OBJ_DIR)/init_env.o \
-		$(OBJ_DIR)/cleaning.o $(OBJ_DIR)/utils.o \
-		$(OBJ_DIR)/builtins.o $(OBJ_DIR)/export.o \
-		$(OBJ_DIR)/echo.o $(OBJ_DIR)/execve.o \
-		$(OBJ_DIR)/exec.o $(OBJ_DIR)/unset.o \
-		$(OBJ_DIR)/parsing.o $(OBJ_DIR)/parsing_utils.o \
-		$(OBJ_DIR)/variable.o $(OBJ_DIR)/cmd_creation.o \
-		$(OBJ_DIR)/temp_creation.o $(OBJ_DIR)/line_creation.o \
-		$(OBJ_DIR)/ft_subvar.o $(OBJ_DIR)/create_temp.o\
-		$(OBJ_DIR)/create_cmd.o $(OBJ_DIR)/cleaning_parsing.o\
+OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
 
@@ -56,15 +46,6 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LFLAGS)
 
 $(OBJ_DIR)/%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(OBJ_DIR)/%.o: $(EXEC_DIR)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(OBJ_DIR)/%.o: $(PARS_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

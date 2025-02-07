@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:33:07 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/03 18:06:25 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/05 11:38:08 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,11 @@ int	ft_execve(t_bash *shell, t_cmd *cmd)
 	int		pipe_fd[2];
 	int		status;
 
+	if (ft_strcmp(cmd->args[0], "!heredoc0") == 0)
+	{
+		heredoc(shell, cmd);
+		return (0);
+	}
 	if (pipe(pipe_fd) == -1)
 	{
 		ft_putendl_fd("pipe failed\n", 2);

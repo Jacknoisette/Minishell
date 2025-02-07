@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:47:13 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/04 14:21:21 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/06 13:16:48 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,21 @@ typedef struct s_cmd
 	int		output;
 }	t_cmd;
 
+typedef struct s_lst_fd
+{
+	struct s_lst_fd	*next;
+	char			*name;
+	int				fd;
+	char			type; // i = input o = output h = here_doc a = append
+	char			*limit;
+}	   t_lst_fd;
+
 typedef struct s_line
 {
-	char	**group;
-	t_cmd	*cmd;
-	int		cmd_nbr;
+	struct s_lst_fd *lst_fd;
+	char			**group;
+	t_cmd			*cmd;
+	int				cmd_nbr;
 }   t_line;
 
 typedef struct s_lst
@@ -80,15 +90,6 @@ typedef struct s_lst
 	char			*name; 
 	char			*data;
 }		t_lst;
-
-typedef struct s_lst_fd
-{
-	struct s_lst	*next;
-	char			*name;
-	int				fd;
-	char			type; // i = input o = output h = here_doc a = append
-	char			*limit;
-}	   t_lst_fd;
 
 typedef struct s_bash t_bash;
 
@@ -107,11 +108,11 @@ typedef struct s_bash
 	int			 prev_return;
 	t_func		  func[7];
 	struct s_lst	*lst_env;
-	struct s_lst_fd *lst_fd;
 }   t_bash;
 
 //EXEC
 int		single_function(t_bash *shell, t_cmd *cmd);
+
 
 //INIT FUNCTION
 void	init_env(t_bash *shell, char **env);
@@ -141,6 +142,7 @@ char	*get_data(char *str);
 //BUILTIN
 
 void	init_func(t_func *builtin);
+void	heredoc(t_bash *shell, t_cmd *cmd);
 int 	ft_echo(t_bash *shell, t_cmd *cmd, int output);
 int		ft_cd(t_bash *shell, t_cmd *cmd, int output);
 int		ft_pwd(t_bash *shell, t_cmd *cmd, int output);

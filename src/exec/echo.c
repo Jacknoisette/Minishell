@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:14:25 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/03 18:06:30 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/06 14:02:09 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,3 +58,6 @@ int ft_echo(t_bash *shell, t_cmd *cmd, int output)
 		ft_printf(output, "\n");
 	return (shell->prev_return = 0, 0);
 }
+
+	// for (int i = 0; i > -1; i++)
+	// 	ft_printf(1, "\033[%im\033[4m%s\033[0m\n", 31 + i % 7, "hello");

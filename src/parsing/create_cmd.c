@@ -6,13 +6,13 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:08:33 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/04 14:25:13 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/07 11:54:48 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_lst_cmd	*create_new_node_cmd(char **arg)
+t_lst_cmd	*create_new_node_cmd(t_char_arg *arg)
 {
 	t_lst_cmd	*new_node;
 
@@ -68,3 +68,27 @@ void	list_add_back_arg(t_lst_arg **list, t_lst_arg *new_node)
 	new_node->next = NULL;
 }
 
+void	ft_printf_list_cmd(t_lst_cmd **list, int output)
+{
+	t_lst_cmd	*tmp;
+	int			i;
+	int			j;
+
+	tmp = *list;
+	i = 0;
+	while (tmp)
+	{
+		ft_printf(output, "Arg %i is \033[34m", i);
+		j = 0;
+		while (tmp->arg[j].str != NULL)
+		{
+			ft_printf(output, "%s", tmp->arg[j].str);
+			if (tmp->arg[j].is_space == TRUE)
+				ft_printf(output, " ");
+			j++;
+		}
+		ft_printf (output, "\033[0m\n");
+		i++;
+		tmp = tmp->next;
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 09:00:43 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/03 18:09:09 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/06 09:08:41 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_minishell(t_bash *shell, char **env)
 	init_func(shell->func);
 	while (1)
 	{
-		input = readline("Input: ");
+		input = readline("Input : ");
 		sig_return = return_signal(0, 0);
 		if (sig_return == 130)
 			shell->prev_return = sig_return;
@@ -45,3 +45,6 @@ void	ft_minishell(t_bash *shell, char **env)
 	}
 	rl_clear_history();
 }
+
+// char *test = ft_strjoin(getenv("USER"), getcwd(NULL, 0));
+// char *test2 = ft_strjoin(test, " : ");
