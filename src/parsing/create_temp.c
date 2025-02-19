@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:17:35 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/04 10:12:06 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/17 10:40:57 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,49 +21,37 @@ t_lst_var	*create_new_node_var(char *string, int is_squote)
 		return (NULL);
 	new_node->string = string;
 	new_node->is_squote = is_squote;
+	new_node->is_var = FALSE;
 	new_node->next = NULL;
 	return (new_node);
 }
 
 void	list_add_back_var(t_lst_var **list, t_lst_var *new_node)
 {
-	t_lst_var *tmp;
+	t_lst_var	*tmp;
 
 	tmp = *list;
 	if (*list == NULL)
 	{
 		*list = new_node;
-		return;
+		return ;
 	}
-	while(tmp->next)
+	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new_node;
 	new_node->next = NULL;
 }
 
-void	ft_printf_list_var(t_lst_var **list, int output)
-{
-	t_lst_var	*tmp;
-
-	tmp = *list;
-	while (tmp)
-	{
-		ft_printf(output, "String is \033[34m%s\033[0m and is in quote \033[34m%c\033[0m\n", tmp->string, tmp->is_squote);
-		tmp = tmp->next;
-	}
-}
-
 int	lst_create_new_var(t_lst_var **lst_var, char *str, t_var v, char quote)
 {
-	t_lst_var *tmp;
-	char *string;
+	t_lst_var	*tmp;
+	char		*string;
 
 	string = ft_subvar(str, v.j, v.i - v.j, quote);
 	if (string == NULL)
 		return (ERROR);
-	if (string[0] == '\0')
-		return (TRUE);
 	tmp = create_new_node_var(string, quote);
+	tmp->is_space = 0;
 	if (tmp == NULL)
 		return (ERROR);
 	list_add_back_var(lst_var, tmp);

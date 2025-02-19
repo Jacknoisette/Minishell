@@ -1,36 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc.c                                          :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 11:49:13 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/13 08:58:14 by tgoudman         ###   ########.fr       */
+/*   Created: 2025/02/11 17:40:19 by tgoudman          #+#    #+#             */
+/*   Updated: 2025/02/11 17:41:15 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_heredoc(char *str, char	*del)
+char	*get_path(char *cmd)
 {
-	int		fd;
-	char	*input;
+	int		j;
+	char	**all_path;
+	char	*join;
+	char	*exec;
 
-	fd = open(str, O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	if (fd == -1)
-		return (perror("Erreur lors de l'ouverture du fichier"));
-	while (1)
+	all_path = ft_split(getenv("PATH"), ':');
+	if (!all_path)
+		exit(1);
+	j = 0;
+	while (all_path[j])
 	{
-		input = readline("heredoc> ");
-		if (input == NULL)
+		join = ft_strjoin(all_path[j], "/");
+		exec = ft_strjoin(join, cmd);
+		free(join);
+		if (access(exec, F_OK | X_OK) == 0)
 		{
-			printf("!!here-document delimited by end-of-file (wanted `%s')!!\n",
-				del);
-			break ;
+			free_cmd(all_path);
+			return (exec);
 		}
-		if (ft_strcmp(input, del) == 0)
-			break ;
-		ft_putendl_fd(input, fd);
+		free(exec);
+		j++;
 	}
+	free_cmd(all_path);
+	return (cmd);
 }

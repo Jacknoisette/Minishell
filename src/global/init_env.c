@@ -6,40 +6,11 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 15:06:55 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/04 12:09:51 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/14 11:42:13 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-t_lst	*create_new_node(char *data, char *name)
-{
-	t_lst	*new_node;
-
-	new_node = malloc(sizeof(t_lst));
-	if (!new_node)
-		return (NULL);
-	new_node->data = data;
-	new_node->name = name;
-	new_node->next = NULL;
-	return (new_node);
-}
-
-void	list_add_back(t_lst **list, t_lst *new_node)
-{
-	t_lst *tmp;
-
-	tmp = *list;
-	if (*list == NULL)
-	{
-		*list = new_node;
-		return;
-	}
-	while(tmp->next)
-		tmp = tmp->next;
-	tmp->next = new_node;
-	new_node->next = NULL;
-}
 
 char	*get_name(char *str)
 {

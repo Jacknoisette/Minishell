@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:00:14 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/03 18:05:56 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/17 10:40:28 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	count_group(char *input, int count)
 int	get_group_size(char *input, int i)
 {
 	int	size;
-	
+
 	size = i;
 	while (input[i] != '\0' && input[i] != ' ')
 	{
@@ -96,7 +96,7 @@ int	create_group(t_bash *shell, char *input, int group_nbr, int pos)
 
 int	search_for_quote(t_bash *shell, char *input)
 {
-	int group_nbr;
+	int	group_nbr;
 
 	group_nbr = count_group(input, 0);
 	if (group_nbr == ERROR)

@@ -6,13 +6,13 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 16:38:05 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/04 14:19:45 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/14 11:35:48 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void free_cmd(char **cmd)
+void	free_cmd(char **cmd)
 {
 	int	i;
 
@@ -43,4 +43,3 @@ void	free_list(t_lst **env)
 			free(tmp);
 	}
 }
-

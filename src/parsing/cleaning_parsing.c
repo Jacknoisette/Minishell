@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:19:30 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/07 15:24:35 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/14 15:21:43 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	free_list_var(t_lst_var **lst_var)
 		if (tmp != NULL)
 			free(tmp);
 	}
+	*lst_var = NULL;
 }
 
 void	free_list_cmd(t_lst_cmd **lst_cmd)
@@ -40,6 +41,7 @@ void	free_list_cmd(t_lst_cmd **lst_cmd)
 		if (tmp != NULL)
 			free(tmp);
 	}
+	*lst_cmd = NULL;
 }
 
 void	free_list_fd(t_lst_fd **lst_fd)
@@ -57,6 +59,7 @@ void	free_list_fd(t_lst_fd **lst_fd)
 		if (tmp != NULL)
 			free(tmp);
 	}
+	*lst_fd = NULL;
 }
 
 void	free_list_line(t_lst_line **lst_line)
@@ -72,6 +75,7 @@ void	free_list_line(t_lst_line **lst_line)
 		if (tmp != NULL)
 			free(tmp);
 	}
+	*lst_line = NULL;
 }
 
 void	free_list_point(t_lst_var ***lst_var, int len)
@@ -95,34 +99,4 @@ void	free_list_point(t_lst_var ***lst_var, int len)
 	}
 	if (*lst_var != NULL)
 		free(*lst_var);
-}
-
-void	free_list_arg(t_lst_arg **lst_arg)
-{
-	t_lst_arg	*tmp;
-
-	while (*lst_arg)
-	{
-		tmp = *lst_arg;
-		(*lst_arg) = (*lst_arg)->next;
-		if (tmp->str != NULL)
-			free(tmp->str);
-		if (tmp != NULL)
-			free(tmp);
-	}
-}
-
-void free_char_arg(t_char_arg *arg)
-{
-	int	i;
-
-	i = 0;
-	if (arg == NULL)
-		return ;
-	while (arg[i].str != NULL)
-	{
-		free(arg[i++].str);
-	}
-	if (arg != NULL)
-		free(arg);
 }

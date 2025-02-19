@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:14:25 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/06 14:02:09 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/12 20:27:41 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	ft_echo_printf(t_cmd *cmd, int output, t_var *v)
 	}
 }
 
-int ft_echo(t_bash *shell, t_cmd *cmd, int output)
+int	ft_echo(t_bash *shell, t_cmd *cmd, int output)
 {
 	t_var	v;
-	int newline;
+	int		newline;
 
 	newline = TRUE;
 	v.i = 1;

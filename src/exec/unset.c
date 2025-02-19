@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:58:16 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/03 18:06:18 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/12 20:27:20 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_lst   *delete_node(t_lst *lst, int n)
+t_lst	*delete_node(t_lst *lst, int n)
 {
-	t_lst   *prev;
-	t_lst   *tmp;
-	int  i;
-	
+	t_lst	*prev;
+	t_lst	*tmp;
+	int		i;
+
 	i = 0;
 	tmp = lst;
 	prev = NULL;
@@ -37,10 +37,12 @@ t_lst   *delete_node(t_lst *lst, int n)
 	return (lst);
 }
 
-t_lst   *search_node(t_bash *shell, char *str)
+t_lst	*search_node(t_bash *shell, char *str)
 {
-	t_lst   *lst;
-	int  i;  i = 0;
+	t_lst	*lst;
+	int		i;
+
+	i = 0;
 	lst = shell->lst_env;
 	if (ft_strcmp(lst->name, str) == 0)
 	{
@@ -57,9 +59,11 @@ t_lst   *search_node(t_bash *shell, char *str)
 	return (shell->lst_env);
 }
 
-int check_args_unset(t_bash *shell, char *str)
+int	check_args_unset(t_bash *shell, char *str)
 {
-	int i;  i = 0;
+	int	i;
+
+	i = 0;
 	if ((str[i] < 'a' || str[i] > 'z') && ((str[i] < 'A' || str[i] > 'Z'))
 		&& (str[i] != '_'))
 	{
@@ -80,9 +84,11 @@ int check_args_unset(t_bash *shell, char *str)
 	return (0);
 }
 
-int ft_unset(t_bash *shell, t_cmd *cmd, int output)
+int	ft_unset(t_bash *shell, t_cmd *cmd, int output)
 {
-	int  i;  (void)output;
+	int	i;
+
+	(void)output;
 	i = 1;
 	while (cmd->args[i])
 	{

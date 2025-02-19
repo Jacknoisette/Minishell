@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:47:13 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/06 13:16:48 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/17 10:36:01 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <signal.h>
 # include <errno.h>
 # include "src/parsing/parsing.h"
+# include "src/exec/builtins.h"
 
 # ifndef TRUE
 #  define TRUE 1
@@ -74,26 +75,26 @@ typedef struct s_lst_fd
 	int				fd;
 	char			type; // i = input o = output h = here_doc a = append
 	char			*limit;
-}	   t_lst_fd;
+}	t_lst_fd;
 
 typedef struct s_line
 {
-	struct s_lst_fd *lst_fd;
+	struct s_lst_fd	*lst_fd;
 	char			**group;
 	t_cmd			*cmd;
 	int				cmd_nbr;
-}   t_line;
+}	t_line;
 
 typedef struct s_lst
 {
 	struct s_lst	*next;
-	char			*name; 
+	char			*name;
 	char			*data;
 }		t_lst;
 
-typedef struct s_bash t_bash;
+typedef struct s_bash	t_bash;
 
-typedef int	(*t_builtins)(t_bash *, t_cmd *, int);
+typedef int				(*t_builtins)(t_bash *, t_cmd *, int );
 
 typedef struct s_func
 {
@@ -104,28 +105,27 @@ typedef struct s_func
 
 typedef struct s_bash
 {
-	t_line		  line;
-	int			 prev_return;
-	t_func		  func[7];
 	struct s_lst	*lst_env;
-}   t_bash;
+	t_line			line;
+	int				prev_return;
+	t_func			func[7];
+}	t_bash;
 
 //EXEC
 int		single_function(t_bash *shell, t_cmd *cmd);
 
-
 //INIT FUNCTION
 void	init_env(t_bash *shell, char **env);
-int 	init_struct(t_bash *shell, char **env);
+int		init_struct(t_bash *shell, char **env);
 
 // MAIN FUNCTION
 int		main(int argc, char **argv, char **env);
-void	ft_minishell(t_bash *shell, char **env);
+int		ft_minishell(t_bash *shell, char **env);
 
 // SIGNALE
 void	init_signale(struct sigaction *sa);
-void 	handler(int signum);
-int 	return_signal(int sig, int access);
+void	handler(int signum);
+int		return_signal(int sig, int access);
 
 //CLEANING
 void	free_list(t_lst **shell);
@@ -137,20 +137,6 @@ void	list_add_back(t_lst **list, t_lst *new_node);
 void	ft_printf_list(t_lst **list, int output);
 char	*get_name(char *str);
 char	*get_data(char *str);
-
-
-//BUILTIN
-
-void	init_func(t_func *builtin);
-void	heredoc(t_bash *shell, t_cmd *cmd);
-int 	ft_echo(t_bash *shell, t_cmd *cmd, int output);
-int		ft_cd(t_bash *shell, t_cmd *cmd, int output);
-int		ft_pwd(t_bash *shell, t_cmd *cmd, int output);
-int		ft_export(t_bash *shell, t_cmd *cmd, int output);
-int		ft_unset(t_bash *shell, t_cmd *cmd, int output);
-int		ft_env(t_bash *shell, t_cmd *cmd, int output);
-int		ft_exit(t_bash *shell, t_cmd *cmd, int output);
-int		ft_execve(t_bash *shell, t_cmd *cmd);
 
 //UTILS
 char	**join_tab(char **tab_dst, char **tab_src);

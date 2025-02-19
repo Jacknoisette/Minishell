@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:32:57 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/03 18:06:33 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/12 20:36:51 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int ft_cd(t_bash *shell, t_cmd *cmd, int output)
+int	ft_cd(t_bash *shell, t_cmd *cmd, int output)
 {
 	(void)output;
 	if (cmd->name == NULL)
-		return(0);
+		return (0);
 	if (cmd->args[1] == NULL)
 		chdir(getenv("HOME"));
 	else
@@ -31,21 +31,21 @@ int ft_cd(t_bash *shell, t_cmd *cmd, int output)
 	return (shell->prev_return = 0, 0);
 }
 
-int ft_pwd(t_bash *shell, t_cmd *cmd, int output)
+int	ft_pwd(t_bash *shell, t_cmd *cmd, int output)
 {
-	char *pathname;
+	char	*pathname;
 
 	(void)cmd;
 	pathname = getcwd(NULL, 0);
 	if (pathname == NULL)
-		return(ft_printf(2, "pwd: %s\n", strerror(errno)),
+		return (ft_printf(2, "pwd: %s\n", strerror(errno)),
 			shell->prev_return = 1, 1);
 	ft_printf(output, "%s\n", pathname);
 	free(pathname);
 	return (shell->prev_return = 0, 0);
 }
 
-int ft_env(t_bash *shell, t_cmd *cmd, int output)
+int	ft_env(t_bash *shell, t_cmd *cmd, int output)
 {
 	(void)cmd;
 	ft_printf_list(&shell->lst_env, output);
@@ -53,7 +53,7 @@ int ft_env(t_bash *shell, t_cmd *cmd, int output)
 	return (0);
 }
 
-int ft_exit(t_bash *shell, t_cmd *cmd, int output)
+int	ft_exit(t_bash *shell, t_cmd *cmd, int output)
 {
 	(void)output;
 	free_list(&shell->lst_env);

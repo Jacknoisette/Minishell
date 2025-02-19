@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 11:24:23 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/03 18:06:23 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/12 20:26:56 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	insert_export(t_bash *shell, char *str)
 {
-	t_lst   *tmp;
-	t_lst   *new;
+	t_lst	*tmp;
+	t_lst	*new;
 	char	*tmp_str;
-	
+
 	tmp = shell->lst_env;
 	shell->prev_return = 0;
 	while (tmp)
@@ -37,10 +37,10 @@ void	insert_export(t_bash *shell, char *str)
 	list_add_back(&shell->lst_env, new);
 }
 
-int check_args_export(t_bash *shell, char *str)
+int	check_args_export(t_bash *shell, char *str)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	if (ft_isalpha(str[i]) == 0 && str[i] != '_')
 	{
@@ -63,10 +63,10 @@ int check_args_export(t_bash *shell, char *str)
 	return (0);
 }
 
-int ft_export(t_bash *shell, t_cmd *cmd, int output)
+int	ft_export(t_bash *shell, t_cmd *cmd, int output)
 {
-	int i;
-	
+	int	i;
+
 	i = 1;
 	(void)output;
 	while (cmd->args[i])

@@ -6,13 +6,13 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 10:52:24 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/03 18:07:27 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/14 11:35:31 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int return_signal(int sig, int access)
+int	return_signal(int sig, int access)
 {
 	static int	return_value;
 	int			temp;
@@ -28,7 +28,7 @@ int return_signal(int sig, int access)
 	return (130);
 }
 
-void handler(int signum)
+void	handler(int signum)
 {
 	int	res;
 
@@ -42,8 +42,7 @@ void handler(int signum)
 
 void	init_signale(struct sigaction *sa)
 {
-	// Définir le gestionnaire pour SIGINT
-	sa->sa_handler = handler;  // Spécifier la fonction à appeler lors de SIGINT
-	sa->sa_flags = 0;		// Pas d'options spéciales
-	sigemptyset(&sa->sa_mask);	 // Aucun signal à bloquer pendant le traitement du signal
+	sa->sa_handler = handler;
+	sa->sa_flags = 0;
+	sigemptyset(&sa->sa_mask);
 }

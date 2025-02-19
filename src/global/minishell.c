@@ -6,23 +6,18 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 09:00:43 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/06 09:08:41 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/14 11:40:33 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_minishell(t_bash *shell, char **env)
+int	ft_minishell(t_bash *shell, char **env)
 {
-	struct sigaction	sa;
-	char			    *input;
+	char				*input;
 	int					sig_return;
 
 	init_struct(shell, env);
-	init_signale(&sa);
-	if (sigaction(SIGINT, &sa, NULL) == -1)
-		perror("Signal error");
-	init_func(shell->func);
 	while (1)
 	{
 		input = readline("Input : ");
@@ -31,10 +26,8 @@ void	ft_minishell(t_bash *shell, char **env)
 			shell->prev_return = sig_return;
 		sig_return = 0;
 		if (input == NULL)
-		{
-			ft_printf(1, "exit\n");
-			return ;
-		}
+			return (free_list(&shell->lst_env),
+				ft_printf(1, "exit\n"), 0);
 		if (!*input)
 		{
 			free(input);
@@ -43,7 +36,7 @@ void	ft_minishell(t_bash *shell, char **env)
 		add_history(input);
 		cmd_manager(shell, input);
 	}
-	rl_clear_history();
+	return (rl_clear_history(), 0);
 }
 
 // char *test = ft_strjoin(getenv("USER"), getcwd(NULL, 0));
