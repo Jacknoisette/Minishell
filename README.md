@@ -13,6 +13,7 @@ invalid read of size 8 in ft_execve in case of (Input  : >file1) works also if h
 Heredoc exit the program !!!
 Heredoc leak 3 bytes
 Certain probleme avec cat et avec heredoc
+Erreur dans le cas ou builtins + |
 
 Result of experience (Not a problem just something to know)
   if (input : echo $USER >file1 >>file1)
