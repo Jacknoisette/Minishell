@@ -5,6 +5,7 @@ Global problem :
 Builtins problems :
 Leak in export (ft_strdup) [not fix]
 exit cause leak
+exit don't manage exit code
 
 Parsing problem :
 
