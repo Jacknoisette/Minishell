@@ -9,6 +9,8 @@ exit don't manage exit code
 
 Parsing problem :
 echo$USER>file1
+if (test = "")
+echo $test>file1 -> echo ">file1"
 
 Exec problem :
 invalid read of size 8 in ft_execve in case of (Input  : >file1) works also if heredoc
