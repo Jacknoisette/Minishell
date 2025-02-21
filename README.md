@@ -4,6 +4,7 @@ Global problem :
 
 Builtins problems :
 Leak in export (ft_strdup) [not fix]
+exit cause leak
 
 Parsing problem :
 
