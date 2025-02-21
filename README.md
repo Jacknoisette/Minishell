@@ -11,8 +11,6 @@ Parsing problem :
 echo$USER>file1
 if (test = "")
 echo $test>file1 -> echo ">file1"
-Potentielement le probleme est global au fait que quelque chose colle au >> ou << le recupere/ efface par le parsing
- echo "hello"|wc -c
 
 Exec problem :
 invalid read of size 8 in ft_execve in case of (Input  : >file1) works also if heredoc
