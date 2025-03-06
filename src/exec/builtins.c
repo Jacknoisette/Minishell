@@ -6,30 +6,30 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:32:57 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/12 20:36:51 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/03 11:54:00 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_cd(t_bash *shell, t_cmd *cmd, int output)
-{
-	(void)output;
-	if (cmd->name == NULL)
-		return (0);
-	if (cmd->args[1] == NULL)
-		chdir(getenv("HOME"));
-	else
-	{
-		if (chdir(cmd->args[1]) != 0)
-		{
-			ft_printf(2, "minishell: cd: %s: %s\n",
-				cmd->args[1], strerror(errno));
-			return (shell->prev_return = 1, 1);
-		}
-	}
-	return (shell->prev_return = 0, 0);
-}
+// int	ft_cd(t_bash *shell, t_cmd *cmd, int output)
+// {
+// 	(void)output;
+// 	if (cmd->name == NULL)
+// 		return (0);
+// 	if (cmd->args[1] == NULL)
+// 		chdir(getenv("HOME"));
+// 	else
+// 	{
+// 		if (chdir(cmd->args[1]) != 0)
+// 		{
+// 			ft_printf(2, "minishell: cd: %s: %s\n",
+// 				cmd->args[1], strerror(errno));
+// 			return (shell->prev_return = 1, 1);
+// 		}
+// 	}
+// 	return (shell->prev_return = 0, 0);
+// }
 
 int	ft_pwd(t_bash *shell, t_cmd *cmd, int output)
 {
@@ -51,21 +51,6 @@ int	ft_env(t_bash *shell, t_cmd *cmd, int output)
 	ft_printf_list(&shell->lst_env, output);
 	shell->prev_return = 0;
 	return (0);
-}
-
-int	ft_exit(t_bash *shell, t_cmd *cmd, int output)
-{
-	(void)output;
-	free_list(&shell->lst_env);
-	if (cmd->args)
-		free_cmd(cmd->args);
-	if (cmd->name)
-		free(cmd->name);
-	if (shell->line.cmd)
-		free(shell->line.cmd);
-	if (shell->line.group)
-		free_cmd(shell->line.group);
-	exit(1);
 }
 
 void	init_func(t_func *builtin)

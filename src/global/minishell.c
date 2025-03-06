@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 09:00:43 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/14 11:40:33 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/27 13:06:00 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ int	ft_minishell(t_bash *shell, char **env)
 	char				*input;
 	int					sig_return;
 
+	interactive_mode(TRUE);
 	init_struct(shell, env);
 	while (1)
 	{
+		interactive_mode(TRUE);
 		input = readline("Input : ");
 		sig_return = return_signal(0, 0);
 		if (sig_return == 130)

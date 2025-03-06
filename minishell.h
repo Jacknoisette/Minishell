@@ -6,12 +6,14 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:47:13 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/17 10:36:01 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:07:26 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# define _POSIX_C_SOURCE 200809L
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -112,7 +114,7 @@ typedef struct s_bash
 }	t_bash;
 
 //EXEC
-int		single_function(t_bash *shell, t_cmd *cmd);
+int		single_function(t_bash *shell, t_cmd *cmd, int index, int fd);
 
 //INIT FUNCTION
 void	init_env(t_bash *shell, char **env);
@@ -123,13 +125,15 @@ int		main(int argc, char **argv, char **env);
 int		ft_minishell(t_bash *shell, char **env);
 
 // SIGNALE
-void	init_signale(struct sigaction *sa);
-void	handler(int signum);
+void	init_signale(void);
+// void	handler(int signum);
+int		interactive_mode(int boolean);
 int		return_signal(int sig, int access);
 
 //CLEANING
 void	free_list(t_lst **shell);
 void	free_cmd(char **cmd);
+void	call_free(t_bash *shell);
 
 //LST
 t_lst	*create_new_node(char *data, char *name);
